@@ -31,3 +31,18 @@ Create some entries in the table
 ```
 INSERT INTO STUDENTS VALUES (1, 'ashwani');
 ```
+
+
+### Notes
+* `wal_level` = `logical` is required for debezium cdc to work. Default wal_level is `replica`.
+* Since for postgres we are using `debezium/postgres:13` image, so we do not have to update the wal_level from replica to logical
+
+### wal_level
+```
+SHOW wal_level;
+
+The output will display the current WAL level, which could be one of the following:
+a) minimal: Generates the least amount of WAL data but does not support replication or point-in-time recovery.
+b) replica: Supports streaming replication and point-in-time recovery.
+c) logical: Supports logical replication.
+```

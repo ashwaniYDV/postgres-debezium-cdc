@@ -7,7 +7,7 @@ docker-compose up -d
 
 Setup DB
 ```
-docker exec -it postgres_debezium_cdc-postgres-1 psql -U admin -d exampledb
+docker exec -it postgres-debezium-cdc-postgres-1 psql -U admin -d exampledb
 
 CREATE TABLE students (id integer primary key, name varchar);
 
@@ -21,10 +21,10 @@ curl -X POST -H "Content-Type: application/json" --data @./debezium-cdc-connecto
 
 Tails the messages from kafka table
 ```
-docker run --tty --network postgres_debezium_cdc_default confluentinc/cp-kafkacat kafkacat -b kafka:9092 \
+docker run --tty --network postgres-debezium-cdc_default confluentinc/cp-kafkacat kafkacat -b kafka:9092 \
 -C -s key=s -s value=avro -r http://schema-registry:8081 -t postgres.public.students
 
-Note: If this command gives error = "Broker not available", then run this command again
+Note: If this command gives error = "Broker: Leader not available", then run this command again
 ```
 
 Create some entries in the table

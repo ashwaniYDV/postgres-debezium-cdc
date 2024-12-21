@@ -46,3 +46,6 @@ a) minimal: Generates the least amount of WAL data but does not support replicat
 b) replica: Supports streaming replication and point-in-time recovery.
 c) logical: Supports logical replication.
 ```
+
+### Resources
+* https://youtu.be/YZRHqRznO-o?si=LmaaCXaY-G6iYRNz

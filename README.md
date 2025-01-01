@@ -1,4 +1,4 @@
-### Steps
+## Steps
 
 Set up docker containers
 ```
@@ -33,11 +33,9 @@ INSERT INTO STUDENTS VALUES (1, 'ashwani');
 ```
 
 
-### Notes
+## Notes
 * `wal_level` = `logical` is required for debezium cdc to work. Default wal_level is `replica`.
 * Since for postgres we are using `debezium/postgres:13` image, so we do not have to update the wal_level from replica to logical
-
-### wal_level
 ```
 SHOW wal_level;
 
@@ -47,5 +45,32 @@ b) replica: Supports streaming replication and point-in-time recovery.
 c) logical: Supports logical replication.
 ```
 
-### Resources
+## PostgreSQL `wal_level` Explanation
+
+In PostgreSQL, the `wal_level` parameter determines the amount of information written to the Write-Ahead Log (WAL) and what capabilities are supported, such as replication and point-in-time recovery (PITR). Below are the available levels:
+
+#### 1. **Minimal**
+- **Purpose**: Generates the least amount of WAL data.
+- **Use Case**: When replication or point-in-time recovery is not required.
+- **Features Supported**: Basic crash recovery.
+- **Trade-off**: Limited functionality but better performance due to reduced WAL generation.
+
+#### 2. **Replica**
+- **Purpose**: Generates enough WAL data to support **streaming replication** and **point-in-time recovery**.
+- **Use Case**: For setting up **physical replication** (e.g., standby servers).
+- **Features Supported**:
+  - Streaming replication.
+  - PITR (Point-in-Time Recovery).
+- **Trade-off**: Increased WAL generation compared to `minimal`.
+
+#### 3. **Logical**
+- **Purpose**: Generates additional WAL information to support **logical replication**.
+- **Use Case**: For replicating specific tables or rows instead of entire databases (e.g., logical replication for selective data).
+- **Features Supported**:
+  - Logical replication.
+  - Streaming replication.
+  - PITR.
+- **Trade-off**: More WAL data is generated, which can impact performance.
+
+## Resources
 * https://youtu.be/YZRHqRznO-o?si=LmaaCXaY-G6iYRNz
